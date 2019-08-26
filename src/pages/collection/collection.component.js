@@ -3,7 +3,7 @@ import CollectionPreview from '../../components/collection-preview/collection-pr
 
 import SHOP_DATA from './shop.data';
 
-class ShopPage extends React.Component {
+class CollectionPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -25,4 +25,4 @@ class ShopPage extends React.Component {
 
 }
 
-export default ShopPage;
+export default CollectionPage;

@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/home/home.component';
-import ShopPage from './pages/shop/shop.component';
-import Header from './components/header/header.component';
+import CollectionPage from './pages/collection/collection.component';
 import RegisterPage from './pages/register/register.component';
+import Header from './components/header/header.component';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Header/>
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/tienda' component={ShopPage} />
+        <Route exact path='/colecciones' component={CollectionPage} />
         <Route exact path='/registro' component={RegisterPage}/>
       </Switch>
     </div>
