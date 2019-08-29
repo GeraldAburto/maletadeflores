@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import 'flexboxgrid/dist/flexboxgrid.css';
 import './App.css';
 
 import HomePage from './pages/home/home.component';
