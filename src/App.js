@@ -48,11 +48,13 @@ class App extends React.Component {
     return (
       <div>
         <Header currentUser={this.state.currentUser} />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route exact path='/colecciones' component={CollectionPage} />
-          <Route exact path='/registro' component={RegisterPage} />
-        </Switch>
+        <div className='container'>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/colecciones' component={CollectionPage} />
+            <Route exact path='/registro' component={RegisterPage} />
+          </Switch>
+        </div>
       </div>
     );
   }
