@@ -1,5 +1,5 @@
 import React from 'react';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 import './sign-in.styles.scss';
@@ -21,30 +21,35 @@ class SignIn extends React.Component {
         this.setState({ [name]: value });
     }
 
-    handleOnSubmit = (event) => {
+    handleOnSubmit = async (event) => {
         event.preventDefault();
-
-        this.setState({ email: '', password: '' });
+        const { email, password } = this.state;
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            this.setState({ email: '', password: '' });
+        } catch (error) {
+            console.error(error.message);
+        }
     }
 
     render() {
+        const { email, password } = this.state;
+
         return (
-            <div className='row'>
-                <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-1'>
-                    <div className='sign-in'>
-                        <h2>Ya tengo una cuenta</h2>
-                        <span>Inicia sesi&oacute;n con tu correo electr&oacute;nico y contrase&ntilde;a</span>
+            <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-0'>
+                <div className='sign-in'>
+                    <h2 className='title'>Ya tengo una cuenta</h2>
+                    <span>Inicia sesi&oacute;n con tu correo electr&oacute;nico y contrase&ntilde;a</span>
 
-                        <form onSubmit={this.handleOnSubmit}>
-                            <FormInput type='email' name='email' label='Correo electrónico' value={this.state.email} handleOnChange={this.handleOnChange} required />
-                            <FormInput type='password' name='password' label='Contraseña' value={this.state.password} handleOnChange={this.handleOnChange} required />
+                    <form onSubmit={this.handleOnSubmit}>
+                        <FormInput type='email' name='email' label='Correo electrónico' value={email} handleOnChange={this.handleOnChange} required />
+                        <FormInput type='password' name='password' label='Contraseña' value={password} handleOnChange={this.handleOnChange} required />
 
-                            <div className='row around-xs'>
-                                <CustomButton size='col-xs-12 col-sm-12 col-md-6' type='submit'>Entrar</CustomButton>
-                                <CustomButton size='col-xs-12 col-sm-12 col-md-6' isGoogleSignIn onClick={signInWithGoogle}>Entrar con Google</CustomButton>
-                            </div>
-                        </form>
-                    </div>
+                        <div className='row around-xs'>
+                            <CustomButton size='col-xs-12 col-sm-12 col-md-12' type='submit'>Entrar</CustomButton>
+                            <CustomButton size='col-xs-12 col-sm-12 col-md-12' isGoogleSignIn onClick={signInWithGoogle}>Entrar con Google</CustomButton>
+                        </div>
+                    </form>
                 </div>
             </div>
         );
